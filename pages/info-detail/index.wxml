@@ -1,0 +1,37 @@
+<view class="info-header">
+  <t-cell description="发布时间： 2023-08-10 11：00" align="top" image="https://tdesign.gtimg.com/miniprogram/images/cell1.png" hover bordered>
+    <view class="cel-title" slot='title'>
+      测试用户1
+      <t-tag class="margin-16" variant="light" size="large" theme="success">顺风车</t-tag>
+      <t-tag class="margin-16" variant="light" size="large" theme="success">车找人</t-tag>
+    </view>
+  </t-cell>
+</view>
+<view class="info-content">
+  <t-cell title="" bordered>
+    <view class="content-des" slot='description'>
+      ᠮᠥᠩᠬᠡ ᠪᠠᠭᠰᠢ ᠎ᠶ᠋ᠢᠨ 《 ᠲᠡᠭᠦᠰ — ᠠᠮᠤᠭᠤᠯᠠᠩ 》 ᠪᠣᠯ ᠬᠥᠮᠦᠨ ᠪᠡᠶ᠎ᠡ ᠎ᠶ᠋ᠢᠨ ᠮᠡᠳᠡᠷᠡᠯ ‍ᠦᠨ ᠰᠢᠰᠲ᠋ᠧᠮ ᠎ᠳ᠋ᠦ᠍ ᠰᠢᠮ᠎ᠡ ᠲᠡᠵᠢᠭᠡᠯ ᠬᠠᠩᠭᠠᠵᠤ ᠂ ᠤᠠᠳᠠᠬᠤ ᠨᠣᠶ᠋ᠢᠷ ‍ᠢ ᠰᠠᠶ᠋ᠢᠵᠢᠷᠠᠭᠤᠯᠤᠨ᠎ᠠ ᠃13847905251( ᠸᠡᠴᠢᠲ ) ᠃
+      <t-grid class="block" column="{{4}}">
+        <t-grid-item data-imgSrc="/image/1.jpg" bindtap="onClick" image="/image/1.jpg" />
+        <t-grid-item image="/image/2.jpg" />
+        <t-grid-item image="/image/3.jpg" />
+        <t-grid-item image="/image/4.jpg" />
+        <t-grid-item image="/image/5.jpg" />
+        <t-grid-item image="/image/6.jpg" />
+        <t-grid-item image="/image/7.jpg" />
+      </t-grid>
+      <t-tag class="location-tag" bindtap="showLocation" icon="location" max-width="{{180}}" theme="primary" variant="light">{{location.name || '苏尼特右旗宾馆'}}</t-tag>
+    </view>
+  </t-cell>
+  <t-cell title="点击拨打电话" hover>
+    <view class="cell-des" slot="description">如想支持我们请告知对方是从信息平台看到的</view>
+    <t-icon class="cell-icon" slot="note" name="call" size="72rpx" data-name="{{item}}" bind:click="onIconTap" />
+  </t-cell>
+</view>
+<t-image-viewer class="imgViewer" bindtap="clickview" closeBtn="{{closeBtn}}" showIndex="{{showIndex}}" visible="{{visible}}" images="{{images}}" bind:change="onChange" bind:delete="onDelete" bind:close="onClose"></t-image-viewer>
+<view class="info-footer">
+  <t-cell hover>
+    <view class="place-des" slot="title">如遇无效、虚假、诈骗信息，请立即举报</view>
+    <t-image slot="note" src="/image/jvbao.png" mode="aspectFill" width="72" height="72" aria-label="一个放置在墙角的黄色行李箱" />
+  </t-cell>
+</view>

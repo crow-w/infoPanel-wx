@@ -1,0 +1,127 @@
+.goods-card {
+  box-sizing: border-box;
+  font-size: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.username {
+  overflow: hidden;
+  display: flex;
+  width: 235rpx;
+  align-items: center;
+  padding: 0rpx 16rpx;
+}
+
+.goods-card__main {
+  position: relative;
+  display: flex;
+  line-height: 1;
+  padding: 0;
+  background: transparent;
+  border-radius: 0 0 16rpx 16rpx;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 16rpx;
+  flex-direction: row;
+}
+
+.goods-card__thumb {
+  position: relative;
+  padding-right: 24rpx;
+  height: 340rpx;
+}
+
+.goods-card__thumb:empty {
+  display: none;
+  margin: 0;
+}
+
+.goods-card__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx 16rpx 0 0;
+  overflow: hidden;
+}
+
+.goods-card__body {
+  display: flex;
+  flex: 1 1 auto;
+  background: #fff;
+  border-radius: 0 0 16rpx 16rpx;
+  flex-direction: column;
+  min-height: 340rpx;
+}
+
+.goods-card__upper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1 1 auto;
+  padding: 24rpx;
+}
+
+.goods-card__title {
+  flex-shrink: 0;
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 400;
+  display: -webkit-box;
+  height: 108rpx;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  word-break: break-word;
+  line-height: 36rpx;
+  letter-spacing: 3rpx;
+}
+.location {
+  margin-top: auto;
+  display: flex;
+}
+
+.goods-card__tag {
+  margin-bottom: 24rpx;
+  display: flex;
+}
+
+.goods-card__down {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  line-height: 32rpx;
+  margin: 8rpx 0 0 0;
+  padding: 0rpx 24rpx;
+}
+
+.goods-card__origin-price {
+  white-space: nowrap;
+  font-weight: 700;
+  order: 2;
+  color: #bbbbbb;
+  font-size: 24rpx;
+  margin: 0 0 0 8rpx;
+}
+
+.goods-card__add-cart {
+  order: 3;
+  margin: auto 0 0 auto;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.spec-for-price {
+  font-size: 36rpx;
+  white-space: nowrap;
+  font-weight: 700;
+  order: 1;
+  color: #fa4126;
+  margin: 0;
+}
+
+.spec-for-symbol {
+  font-size: 24rpx;
+}

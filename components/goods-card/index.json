@@ -1,0 +1,15 @@
+{
+  "component": true,
+  "usingComponents": {
+    "price": "/components/price/index",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-image": "/components/webp-image/index",
+    "t-avatar": "tdesign-miniprogram/avatar/avatar",
+    "t-divider": "tdesign-miniprogram/divider/divider",
+    "t-tag": "tdesign-miniprogram/tag/tag",
+    "t-footer": "tdesign-miniprogram/footer/footer",
+    "t-grid": "tdesign-miniprogram/grid/grid",
+    "t-grid-item": "tdesign-miniprogram/grid-item/grid-item",
+    "t-textarea": "tdesign-miniprogram/textarea/textarea"
+  }
+}

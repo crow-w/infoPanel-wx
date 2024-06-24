@@ -1,0 +1,47 @@
+/* pages/info-detail/index.wxss */
+.avatar-example {
+  margin-right: 64rpx;
+}
+.info-header, .info-content, .info-footer {
+  display: flex;
+  padding: 0rpx 36rpx;
+}
+.info-content {
+  flex-direction: column;
+}
+.t-tag {
+  margin-right: 16rpx;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+}
+.cel-title {
+  color: blue;
+}
+.content-des {
+  white-space: break-spaces;
+}
+.cell-des {
+  color: blue;
+  font-size: 14px;
+}
+.cell-icon {
+  color: blue;
+}
+.location-tag {
+  margin-top: 24rpx;
+}
+.t-cell__note {
+  justify-content: end;
+}
+.t-cell {
+  margin-top: 30rpx;
+}
+page {
+  min-height: 100vh;
+  background: linear-gradient(#fff, #f5f5f5);
+}
+.imgViewer image {
+  width: 100vw !important;
+}

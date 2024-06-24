@@ -1,0 +1,34 @@
+<view id="{{independentID}}" class="goods-card" data-goods="{{ info }}">
+	<view class="goods-card__main">
+		<view class="goods-card__thumb" bind:tap="clickThumbHandle">
+			<t-avatar t-class="goods-card__img" image="{{info.thumb}}" />
+		</view>
+		<view class="goods-card__body">
+			<view class="goods-card__upper">
+				<view class="goods-card__tag">
+					<t-tag theme="warning">{{ info.category || '本地服务'}}</t-tag>
+					<view class="username">{{ info.username || '用户名称'}}</view>
+					<t-tag bind:tap="clickTel" data-index="{{info.tel || '1111'}}" class="margin-16" theme="primary" icon="call"> 拨打电话 </t-tag>
+				</view>
+				<view wx:if="{{ info.content }}" bindtap="toDetail" class="goods-card__title">
+					<t-tag wx:if="{{info.subTag}}" class="margin-16" variant="light" size="small" theme="success">{{info.subTag}}</t-tag>
+					{{ info.content }}
+				</view>
+				<t-textarea t-class="external-class" placeholder="请输入文字" disableDefaultPadding="{{true}}" value="{{code}}" />
+				<t-grid bindtap="toDetail" wx:if="{{info.userImages.length > 0}}" class="block" column="{{3}}">
+					<block wx:for="{{info.userImages}}" wx:for-item='item' wx:key="index">
+						<t-grid-item image="{{item}}" />
+					</block>
+				</t-grid>
+				<view class="location">
+					<t-tag wx:if="{{info.location}}" bindtap="showLocation" icon="location" max-width="{{180}}" theme="primary" variant="light" data-location="{{info.location}}">{{info.location.name}}</t-tag>
+				</view>
+			</view>
+			<view class="goods-card__down">
+				<t-footer text="{{info.times || 0 }}浏览"></t-footer>
+				<t-footer text="{{info.createTime}}"></t-footer>
+			</view>
+		</view>
+	</view>
+	<t-divider />
+</view>

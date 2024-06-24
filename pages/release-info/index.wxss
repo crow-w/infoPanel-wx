@@ -1,0 +1,86 @@
+/* pages/release-info/index.wxss */
+.releasePage {
+  background: linear-gradient(#fff, #f5f5f5);
+  height: 100vh;
+  overflow: scroll;
+}
+.t-cell {
+  margin: 25rpx 0rpx;
+}
+.t-cell::after {
+  left: 0 !important;
+}
+.t-input__icon--prefix {
+  color: #0052d9 !important;
+}
+.t-textarea {
+  margin-bottom: 25rpx;
+}
+.t-input__tips {
+  color: red !important;
+}
+.t-checkbox__icon--left {
+  color: #0052d9 !important;
+}
+.concat {
+  margin-bottom: 0rpx !important;
+}
+.t-checkbox__title {
+  display: flex !important;
+  justify-content: space-between;
+}
+.block {
+  /*background: #fff;*/
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.block--top,
+.block--bottom {
+  width: 100vw;
+  height: 240px;
+}
+
+.block--left,
+.block--right {
+  width: 280px;
+  height: 100vh;
+}
+
+.block--center {
+  width: 240px;
+  height: 240px;
+}
+
+.wrapper + .wrapper {
+  margin-top: 32rpx;
+}
+.wrapper {
+  margin-bottom: 32rpx;
+}
+
+.long-content {
+  height: 576rpx;
+  margin-top: 16rpx;
+  font-size: 32rpx;
+  color: #888;
+}
+
+.long-content .content-container {
+  white-space: pre-line;
+}
+.t-cell-group--card {
+  display: flex;
+  flex-direction: column;
+}
+.mt-10 {
+  margin: 50rpx 0rpx 200rpx 0rpx !important;
+}
+.mt-5 {
+  margin-top: 24rpx;
+}
+.t-grid__content {
+  padding: 20rpx !important;
+}

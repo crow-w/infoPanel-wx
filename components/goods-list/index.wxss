@@ -1,0 +1,6 @@
+.goods-list-wrap {
+  display: flex;
+  flex-flow: column;
+  padding: 0;
+  background: #fff;
+}
