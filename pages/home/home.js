@@ -1,5 +1,4 @@
 import { fetchHome } from '../../services/home/home';
-import { fetchGoodsList } from '../../services/good/fetchGoods';
 import { fetchUnloginInfoList } from '../../services/info/fetchInfo';
 import Toast from 'tdesign-miniprogram/toast/index';
 // test
@@ -30,7 +29,10 @@ Page({
   },
 
   privateData: {
-    tabIndex: 0,
+    tabIndex: {
+      value: 0,
+      label: '',
+    },
   },
 
   onShow() {
@@ -73,6 +75,7 @@ Page({
 
   tabChangeHandle(e) {
     this.privateData.tabIndex = e.detail;
+    console.log('tapTab', e.detail);
     this.loadGoodsList(true);
   },
 
@@ -91,15 +94,14 @@ Page({
     });
 
     const pageSize = this.goodListPagination.num;
-    let pageIndex = this.privateData.tabIndex * pageSize + this.goodListPagination.index + 1;
+    let pageIndex = this.goodListPagination.index + 1;
     if (fresh) {
-      pageIndex = 0;
+      pageIndex = 1;
     }
 
     try {
-      const nextList = await fetchGoodsList(pageIndex, pageSize);
-      const { InfoList } = await fetchUnloginInfoList();
-      console.log('list', nextList, InfoList);
+      console.log('privateData', this.privateData.tabIndex);
+      const { InfoList } = await fetchUnloginInfoList(pageIndex, pageSize, this.privateData.tabIndex.value);
       this.setData({
         infoList: fresh ? InfoList : this.data.infoList.concat(InfoList),
         goodsListLoadStatus: 0,

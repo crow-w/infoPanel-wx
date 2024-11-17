@@ -17,6 +17,10 @@ function mockFetchHome() {
     return {
       swiper: genSwiperImageList(),
       tabList: [
+        // {
+        //   categoryName: ‘顺风车’,
+        //   categpryIdentifier: 1000,
+        // },
         {
           text: '最新信息',
           key: 0,

@@ -1,8 +1,8 @@
 import { infoApi } from '../../api/index';
 
-export function fetchUnloginInfoList() {
+export function fetchUnloginInfoList(pageIndex, pageSize, category) {
   return infoApi
-    .getUnloginInfo()
+    .getUnloginInfo(pageIndex, pageSize, category)
     .then((res) => {
       console.log('res', res);
       return res;

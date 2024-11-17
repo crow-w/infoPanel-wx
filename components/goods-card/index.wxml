@@ -8,7 +8,7 @@
 				<view class="goods-card__tag">
 					<t-tag theme="warning">{{ info.category || '本地服务'}}</t-tag>
 					<view class="username">{{ info.username || '用户名称'}}</view>
-					<t-tag bind:tap="clickTel" data-index="{{info.tel || '1111'}}" class="margin-16" theme="primary" icon="call"> 拨打电话 </t-tag>
+					<t-tag bind:tap="clickTel" data-index="{{info.tel || '1111'}}" style="margin-left: auto;" class="margin-16" theme="primary" icon="call"> 拨打电话 </t-tag>
 				</view>
 				<view wx:if="{{ info.content }}" bindtap="toDetail" class="goods-card__title">
 					<t-tag wx:if="{{info.subTag}}" class="margin-16" variant="light" size="small" theme="success">{{info.subTag}}</t-tag>

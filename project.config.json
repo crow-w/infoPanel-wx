@@ -47,7 +47,7 @@
     "condition": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.23.1",
+  "libVersion": "3.6.3",
   "appid": "wx6faa3ee80915c512",
   "projectname": "tdesign-miniprogram-starter-retail",
   "simulatorType": "wechat",
