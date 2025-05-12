@@ -1,0 +1,12 @@
+.external-class {
+  --td-textarea-disabled-text-color: black;
+}
+.text-deal {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-break: break-all; /* 追加这一行代码 */
+  margin-top: 20px;
+}

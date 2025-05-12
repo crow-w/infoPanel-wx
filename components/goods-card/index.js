@@ -1,3 +1,4 @@
+import { rpx2px } from '../../utils/util';
 Component({
   options: {
     addGlobalClass: true,
@@ -15,6 +16,10 @@ Component({
       },
     },
     data: {
+      itemStates: {},
+      isOverThreeLines: false,
+      images: ['/path/to/image1.jpg'], // 图片数组
+      imageMode: 'aspectFit', // 默认模式
       code: '',
       type: Object,
       observer(data) {
@@ -50,6 +55,7 @@ Component({
   },
 
   data: {
+    isExpanded: false,
     independentID: '',
     info: {
       id: '',
@@ -60,7 +66,9 @@ Component({
   lifetimes: {
     ready() {
       this.init();
+      console.log('attached', this.checkTextOverflow());
     },
+    attached() {},
     detached() {
       this.clear();
     },
@@ -69,6 +77,37 @@ Component({
   pageLifeTimes: {},
 
   methods: {
+    checkTextOverflow() {
+      const query = this.createSelectorQuery();
+      query
+        .select(`#${this.data.independentID}`)
+        .boundingClientRect((rect) => {
+          console.log('rect', rect);
+          if (rect) {
+            const lineHeight = rpx2px(35); // 单行高度
+            console.log('height', lineHeight, rect.height);
+            const maxHeight = lineHeight * 3; // 三行的最大高度
+            const isOverThreeLines = rect.height > maxHeight;
+            console.log('item', isOverThreeLines);
+            this.setData({
+              [`itemStates.${this.data.independentID}`]: isOverThreeLines, // 判断是否超过三行
+            });
+          }
+        })
+        .exec();
+    },
+
+    onImageLoad(e) {
+      const { width, height } = e.detail;
+      const aspectRatio = width / height;
+
+      // 判断图片比例，动态调整显示模式
+      if (aspectRatio > 1) {
+        this.setData({ imageMode: 'widthFix' }); // 宽图模式
+      } else {
+        this.setData({ imageMode: 'heightFix' }); // 长图模式
+      }
+    },
     showLocation(e) {
       const { location } = e.target.dataset;
       wx.openLocation({
@@ -76,17 +115,12 @@ Component({
         longitude: location.longitude,
       });
     },
-    toDetail() {
-      wx.login({
-        timeout: 1000000000,
-        success: (res) => {
-          console.log('res', res);
-          this.setData({
-            code: res.code,
-          });
-        },
-      });
-      console.log('detail');
+    toDetail(e) {
+      if (e.target.dataset.canexpanded) {
+        this.setData({
+          isExpanded: !this.data.isExpanded,
+        });
+      }
 
       // wx.navigateTo({
       //   url: '/pages/info-detail/index',

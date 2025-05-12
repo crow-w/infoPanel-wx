@@ -1,42 +1,45 @@
 <view class="releasePage">
-  <t-cell-group theme="card">
-    <t-cell title="发布分类" required note="{{category}}" bind:click="onAreaPicker" leftIcon="relativity" hover arrow="{{!category}}" />
-    <t-cell class="concat" title="发布内容" required leftIcon="format-vertical-align-left">
-    </t-cell>
-    <t-textarea t-class="external-class" bordered maxlength="100" placeholder="请输入文字" disableDefaultPadding="{{true}}" />
+	<t-cell-group theme="card">
+		<t-cell title="发布分类" required note="{{category}}" bind:click="onAreaPicker" leftIcon="relativity" hover arrow="{{!category}}" />
+		<t-cell class="concat" title="发布内容" required leftIcon="format-vertical-align-left">
+		</t-cell>
+		<t-textarea bind:change="handleInput" value="{{model.content}}" show-confirm-bar t-class="external-class" bordered maxlength="200" placeholder="请输入文字" disableDefaultPadding="{{true}}" />
 
-    <view class="wrapper">
-      <t-upload media-type="{{['video','image']}}" files="{{originFiles}}" gridConfig="{{gridConfig}}" bind:success="handleSuccess" bind:remove="handleRemove" bind:click="handleClick" />
-      <view class="mt-5">
-        <t-button wx:if="{{!location}}" bindtap="tapLocation" theme="primary" icon="location" content="获取位置信息" size="extra-small" class="margin"></t-button>
-        <t-tag wx:if="{{location}}" bindtap="tapLocation" icon="location" max-width="{{350}}" theme="primary" variant="light">{{location.name || '位置'}}</t-tag>
-      </view>
-    </view>
-    <t-input prefix-icon="call" maxcharacter='11' label="手机号" value="{{phoneNumber}}" type="number" tips="{{phoneError ? '* 手机号格式有误！' : ''}}" bindchange="onPhoneInput" placeholder="请输入手机号码">
-      <t-button bindtap="getCellphone" slot="suffix" theme="primary" size="extra-small"> 获取本机 </t-button>
-    </t-input>
-    <t-cell class="concat" title="发布协议" note="(同意协议才能发布)" required leftIcon="root-list" />
-    <t-checkbox value="{{checkbox}}" content-disabled label="同意协议" icon="rectangle">
-      <t-link data-key="showMultiTextAndTitle" size="large" theme="primary" content="查看协议" bind:tap="showDialog" suffixIcon="jump" hover />
-    </t-checkbox>
-    <t-button theme="primary" size="large" loading class="mt-10">发布中</t-button>
-  </t-cell-group>
-  <t-dialog visible="{{showMultiTextAndTitle}}" title="协议内容" confirm-btn="{{ confirmBtn }}" bind:confirm="closeDialog">
-    <scroll-view slot="content" scroll-y class="long-content">
-      <view class="content-container">这里是超长的协议内容
-        这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容
-        这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容
-        这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容
-        这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容
-        这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容
-      </view>
-    </scroll-view>
-  </t-dialog>
-  <!-- <t-popup visible="{{popVisible}}" bind:visible-change="onVisibleChange" placement="center">
+		<view class="wrapper">
+			<t-upload grid-config="{{girdConfig}}" media-type="{{['image']}}" max="{{9}}" files="{{model.images}}" bind:success="handleSuccess" bind:remove="handleRemove" bind:click="handleClick" />
+			<view class="mt-5">
+				<t-button wx:if="{{!mode.location}}" bindtap="tapLocation" theme="primary" icon="location" content="获取当前位置信息" size="extra-small" class="margin"></t-button>
+				<t-tag wx:if="{{mode.location}}" bindtap="tapLocation" icon="location" max-width="{{350}}" theme="primary" variant="light">{{model.location.name || '位置'}}</t-tag>
+			</view>
+		</view>
+		<t-input prefix-icon="call" maxcharacter='11' value="{{phoneNumber}}" type="number" tips="{{phoneError ? '* 手机号格式有误！' : ''}}" bindchange="onPhoneInput" placeholder="请输入手机号码">
+			<view slot="label" style="display: flex;text-indent: 5px;">手机号<text style="color: #d54941;text-indent: 5px;">*</text></view>
+			<t-button bindtap="getCellphone" slot="suffix" theme="primary" size="extra-small"> 获取本机 </t-button>
+		</t-input>
+		<t-cell class="concat" title="发布协议" note="(同意协议才能发布)" required leftIcon="root-list" />
+		<t-checkbox bind:change="handleCheck" value="{{model.checked}}" content-disabled label="同意协议" icon="rectangle">
+			<t-link data-key="showMultiTextAndTitle" size="large" theme="primary" content="查看协议" bind:tap="showDialog" suffixIcon="jump" hover />
+		</t-checkbox>
+		<t-button bind:tap="handleSubmit" theme="primary" size="large" disabled="{{!(model.category.length > 0 && model.content.length > 0 && model.tel.length > 0 && model.checked && !phoneError)}}" loading="{{isLoading}}" class="mt-10">{{isLoading? '发布中': '点击发布'}}</t-button>
+	</t-cell-group>
+	<t-dialog visible="{{showMultiTextAndTitle}}" title="协议内容" confirm-btn="{{ confirmBtn }}" bind:confirm="closeDialog">
+		<scroll-view slot="content" scroll-y class="long-content">
+			<view class="content-container">这里是超长的协议内容
+				这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容
+				这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容
+				这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容
+				这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容
+				这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容，这里是超长的协议内容
+			</view>
+		</scroll-view>
+	</t-dialog>
+	<t-dialog visible="{{showConfirm}}" title="信息发布成功" content="您的信息已经成功发布请选择返回信息中心还是继续发布新信息！" confirm-btn="{{ { content: '继续发布', variant: 'base' } }}" cancel-btn="前往信息中心" bind:confirm="continuePublic" bind:cancel="goInfoCenter" />
+
+	<!-- <t-popup visible="{{popVisible}}" bind:visible-change="onVisibleChange" placement="center">
     <view class="block block--center">sss</view>
   </t-popup> -->
-  <t-picker visible="{{areaVisible}}" value="{{areaValue}}" title="选择分类" cancelBtn="取消" confirmBtn="确认" bindchange="onPickerChange" bindpick="onColumnChange" bindcancel="onPickerCancel">
-    <t-picker-item options="{{tag}}"></t-picker-item>
-    <t-picker-item options="{{subTag}}"></t-picker-item>
-  </t-picker>
+	<t-picker visible="{{areaVisible}}" value="{{areaValue}}" title="选择分类" cancelBtn="取消" confirmBtn="确认" bindchange="onPickerChange" bindpick="onColumnChange" bindcancel="onPickerCancel">
+		<t-picker-item options="{{tag}}"></t-picker-item>
+		<t-picker-item options="{{subTag}}"></t-picker-item>
+	</t-picker>
 </view>

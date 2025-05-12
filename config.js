@@ -3,7 +3,8 @@ let BASEURL;
 
 switch (ENV) {
   case 'production':
-    BASEURL = 'http://localhost:3000/v1';
+    BASEURL = 'http://192.168.2.12:3000//api/app';
+    // BASEURL = 'http://local.xinxi.com:8888//api/app';
     break;
   case 'test':
     BASEURL = 'http://localhost:3000/v1';

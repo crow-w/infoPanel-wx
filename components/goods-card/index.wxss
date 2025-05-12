@@ -67,13 +67,25 @@
   color: #333;
   font-weight: 400;
   display: -webkit-box;
+  /* height: 108rpx; */
+  /* -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden; */
+  word-break: break-word;
+  line-height: 36rpx;
+  letter-spacing: 3rpx;
+  transition: all 0.3s ease;
+}
+.undexpanded {
   height: 108rpx;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
-  word-break: break-word;
-  line-height: 36rpx;
-  letter-spacing: 3rpx;
+}
+.expanded {
+  overflow: unset !important;
+  height: 500rpx !important;
+  -webkit-line-clamp: unset !important;
 }
 .location {
   margin-top: auto;

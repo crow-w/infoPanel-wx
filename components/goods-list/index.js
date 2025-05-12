@@ -2,7 +2,7 @@ Component({
   externalClasses: ['wr-class'],
 
   properties: {
-    InfoList: {
+    infoList: {
       type: Array,
       value: [],
     },

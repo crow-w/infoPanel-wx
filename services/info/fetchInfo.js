@@ -1,7 +1,7 @@
 import { infoApi } from '../../api/index';
 
-export function fetchUnloginInfoList(pageIndex, pageSize, category) {
-  return infoApi
+export async function fetchUnloginInfoList(pageIndex, pageSize, category) {
+  return await infoApi
     .getUnloginInfo(pageIndex, pageSize, category)
     .then((res) => {
       console.log('res', res);

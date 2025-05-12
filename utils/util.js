@@ -49,11 +49,7 @@ const cosThumb = (url, width, height = width) => {
 
 const get = (source, paths, defaultValue) => {
   if (typeof paths === 'string') {
-    paths = paths
-      .replace(/\[/g, '.')
-      .replace(/\]/g, '')
-      .split('.')
-      .filter(Boolean);
+    paths = paths.replace(/\[/g, '.').replace(/\]/g, '').split('.').filter(Boolean);
   }
   const { length } = paths;
   let index = 0;
@@ -68,12 +64,8 @@ export const loadSystemWidth = () => {
   if (systemWidth) {
     return systemWidth;
   }
-
-  try {
-    ({ screenWidth: systemWidth, pixelRatio } = wx.getSystemInfoSync());
-  } catch (e) {
-    systemWidth = 0;
-  }
+  const windowInfo = wx.getWindowInfo();
+  systemWidth = windowInfo.screenWidth;
   return systemWidth;
 };
 
@@ -108,8 +100,7 @@ const phoneEncryption = (phone) => {
 };
 
 // 内置手机号正则字符串
-const innerPhoneReg =
-  '^1(?:3\\d|4[4-9]|5[0-35-9]|6[67]|7[0-8]|8\\d|9\\d)\\d{8}$';
+const innerPhoneReg = '^1(?:3\\d|4[4-9]|5[0-35-9]|6[67]|7[0-8]|8\\d|9\\d)\\d{8}$';
 
 /**
  * 手机号正则校验

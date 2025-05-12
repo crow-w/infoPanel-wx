@@ -1,23 +1,23 @@
-import {
-  fetchUserCenter
-} from '../../services/usercenter/fetchUsercenter';
+import { fetchUserCenter } from '../../services/usercenter/fetchUsercenter';
 import Toast from 'tdesign-miniprogram/toast/index';
 
 const menuData = [
-  [{
-      title: '优惠券',
-      tit: '',
-      url: '',
-      type: 'coupon',
-    },
+  // [
+  //   {
+  //     title: '优惠券',
+  //     tit: '',
+  //     url: '',
+  //     type: 'coupon',
+  //   },
+  //   {
+  //     title: '积分',
+  //     tit: '',
+  //     url: '',
+  //     type: 'point',
+  //   },
+  // ],
+  [
     {
-      title: '积分',
-      tit: '',
-      url: '',
-      type: 'point',
-    },
-  ],
-  [{
       title: '意见建议',
       tit: '',
       url: '',
@@ -33,7 +33,8 @@ const menuData = [
   ],
 ];
 
-const orderTagInfos = [{
+const orderTagInfos = [
+  {
     title: '已发布',
     iconName: 'wallet',
     orderNum: 0,
@@ -91,49 +92,38 @@ Page({
   },
 
   fetUseriInfoHandle() {
-    fetchUserCenter().then(
-      ({
+    fetchUserCenter().then(({ userInfo, countsData, orderTagInfos: orderInfo, customerServiceInfo }) => {
+      // eslint-disable-next-line no-unused-expressions
+      menuData?.[0].forEach((v) => {
+        countsData.forEach((counts) => {
+          if (counts.type === v.type) {
+            // eslint-disable-next-line no-param-reassign
+            v.tit = counts.num;
+          }
+        });
+      });
+      const info = orderTagInfos.map((v, index) => ({
+        ...v,
+        ...orderInfo[index],
+      }));
+      this.setData({
         userInfo,
-        countsData,
-        orderTagInfos: orderInfo,
+        menuData,
+        orderTagInfos: info,
         customerServiceInfo,
-      }) => {
-        // eslint-disable-next-line no-unused-expressions
-        menuData?.[0].forEach((v) => {
-          countsData.forEach((counts) => {
-            if (counts.type === v.type) {
-              // eslint-disable-next-line no-param-reassign
-              v.tit = counts.num;
-            }
-          });
-        });
-        const info = orderTagInfos.map((v, index) => ({
-          ...v,
-          ...orderInfo[index],
-        }));
-        this.setData({
-          userInfo,
-          menuData,
-          orderTagInfos: info,
-          customerServiceInfo,
-          currAuthStep: 2,
-        });
-        wx.stopPullDownRefresh();
-      },
-    );
+        currAuthStep: 2,
+      });
+      wx.stopPullDownRefresh();
+    });
   },
 
-  onClickCell({
-    currentTarget
-  }) {
-    const {
-      type
-    } = currentTarget.dataset;
+  onClickCell({ currentTarget }) {
+    const { type } = currentTarget.dataset;
 
     switch (type) {
       case 'address': {
         wx.navigateTo({
-          url: '/pages/usercenter/address/list/index'
+          url: '/pages/usercenter/address/list/index',
         });
         break;
       }
@@ -163,7 +153,7 @@ Page({
       }
       case 'coupon': {
         wx.navigateTo({
-          url: '/pages/coupon/coupon-list/index'
+          url: '/pages/coupon/coupon-list/index',
         });
         break;
       }
@@ -185,30 +175,30 @@ Page({
 
     if (status === 0) {
       wx.navigateTo({
-        url: '/pages/order/after-service-list/index'
+        url: '/pages/order/after-service-list/index',
       });
     } else {
       wx.navigateTo({
-        url: `/pages/order/order-list/index?status=${status}`
+        url: `/pages/order/order-list/index?status=${status}`,
       });
     }
   },
 
   jumpAllOrder() {
     wx.navigateTo({
-      url: '/pages/order/order-list/index'
+      url: '/pages/user-info-list/index',
     });
   },
 
   openMakePhone() {
     this.setData({
-      showMakePhone: true
+      showMakePhone: true,
     });
   },
 
   closeMakePhone() {
     this.setData({
-      showMakePhone: false
+      showMakePhone: false,
     });
   },
 
@@ -219,12 +209,10 @@ Page({
   },
 
   gotoUserEditPage() {
-    const {
-      currAuthStep
-    } = this.data;
+    const { currAuthStep } = this.data;
     if (currAuthStep === 2) {
       wx.navigateTo({
-        url: '/pages/usercenter/person-info/index'
+        url: '/pages/usercenter/person-info/index',
       });
     } else {
       this.fetUseriInfoHandle();
@@ -233,10 +221,7 @@ Page({
 
   getVersionInfo() {
     const versionInfo = wx.getAccountInfoSync();
-    const {
-      version,
-      envVersion = __wxConfig
-    } = versionInfo.miniProgram;
+    const { version, envVersion = __wxConfig } = versionInfo.miniProgram;
     this.setData({
       versionNo: envVersion === 'release' ? version : envVersion,
     });

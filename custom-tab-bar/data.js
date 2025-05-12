@@ -1,4 +1,5 @@
-export default [{
+export default [
+  {
     icon: 'home',
     text: '信息中心',
     url: 'pages/home/home',

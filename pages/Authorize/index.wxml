@@ -1,0 +1,12 @@
+<!--pages/Authorize/index.wxml-->
+<view class="content-wrapper">
+	<t-image class="img-box" src="{{imageSrc}}" width="120" height="120" shape="round" />
+	<t-divider />
+	<text class="content" style="font-size: larger;">申请获取以下权限</text>
+	<text class="content" style="color: rgb(165, 164, 164);">获取你的公开信息（昵称，头像等）</text>
+	<view class="content" style="margin-top: 64rpx;">
+		<t-checkbox style="padding: 0px;" borderless label="同意《用户服务协议》及《隐私政策》" icon="rectangle" default-checked />
+	</view>
+	<t-button bind:tap="wechatLogin" style="height: 82rpx; " class="btn" block t-class="external-class" theme="primary" size="large" shape="round">授权登录</t-button>
+	<t-button bind:tap="navBack" style="height: 82rpx;" class="btn" block t-class="external-class" size="large" shape="round">取消授权</t-button>
+</view>

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "t-image": "tdesign-miniprogram/image/image",
+    "t-divider": "tdesign-miniprogram/divider/divider",
+    "t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
+    "t-button": "tdesign-miniprogram/button/button"
+  },
+  "navigationStyle": "custom"
+}

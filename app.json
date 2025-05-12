@@ -21,7 +21,9 @@
     "pages/order/invoice/index",
     "pages/usercenter/name-edit/index",
     "pages/release-info/index",
-    "pages/info-detail/index"
+    "pages/info-detail/index",
+    "pages/Authorize/index",
+    "pages/user-info-list/index"
   ],
   "tabBar": {
     "custom": true,

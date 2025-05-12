@@ -25,22 +25,21 @@ Page({
 
   goodListPagination: {
     index: 0,
-    num: 20,
+    num: 5,
   },
-
   privateData: {
     tabIndex: {
-      value: 0,
+      value: '',
       label: '',
     },
+  },
+  onLoadLogin() {
+    //拿到token啦，可以使用token发起请求了
+    this.init();
   },
 
   onShow() {
     this.getTabBar().init();
-  },
-
-  onLoad() {
-    this.init();
   },
 
   onReachBottom() {
@@ -72,7 +71,6 @@ Page({
       this.loadGoodsList(true);
     });
   },
-
   tabChangeHandle(e) {
     this.privateData.tabIndex = e.detail;
     console.log('tapTab', e.detail);
@@ -101,9 +99,9 @@ Page({
 
     try {
       console.log('privateData', this.privateData.tabIndex);
-      const { InfoList } = await fetchUnloginInfoList(pageIndex, pageSize, this.privateData.tabIndex.value);
+      const nextData = await fetchUnloginInfoList(pageIndex, pageSize, this.privateData.tabIndex.value);
       this.setData({
-        infoList: fresh ? InfoList : this.data.infoList.concat(InfoList),
+        infoList: fresh ? nextData.data.data : this.data.infoList.concat(nextData.data.data),
         goodsListLoadStatus: 0,
       });
 

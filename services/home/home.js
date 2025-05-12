@@ -1,8 +1,9 @@
 import { config, cdnBase } from '../../config/index';
 import { infoApi } from '../../api/index';
+import { categoryApi } from '../../api/index';
 
 /** 获取首页数据 */
-function mockFetchHome() {
+async function mockFetchHome() {
   infoApi
     .getUnloginInfo()
     .then((res) => {
@@ -11,53 +12,22 @@ function mockFetchHome() {
     .catch((err) => {
       console.log('err', err);
     });
+  const categoryData = await categoryApi.getCategory().catch((err) => {
+    console.log('err', err);
+  });
+  const tabList = categoryData.data.map((r) => {
+    return {
+      text: r.name,
+      key: r.code,
+    };
+  });
+  tabList.unshift({ text: '最新信息', key: '' });
   const { delay } = require('../_utils/delay');
   const { genSwiperImageList } = require('../../model/swiper');
   return delay().then(() => {
     return {
       swiper: genSwiperImageList(),
-      tabList: [
-        // {
-        //   categoryName: ‘顺风车’,
-        //   categpryIdentifier: 1000,
-        // },
-        {
-          text: '最新信息',
-          key: 0,
-        },
-        {
-          text: '顺风车',
-          key: 1,
-        },
-        {
-          text: '求职招聘',
-          key: 2,
-        },
-        {
-          text: '二手车',
-          key: 3,
-        },
-        {
-          text: '房屋租赁',
-          key: 4,
-        },
-        {
-          text: '生意转让',
-          key: 5,
-        },
-        {
-          text: '本地服务',
-          key: 6,
-        },
-        {
-          text: '物品买卖',
-          key: 7,
-        },
-        {
-          text: '寻人寻物',
-          key: 8,
-        },
-      ],
+      tabList: tabList,
       activityImg: `${cdnBase}/activity/banner.png`,
     };
   });

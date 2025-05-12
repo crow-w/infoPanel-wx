@@ -35,7 +35,8 @@ function request(options) {
   if (!ignoreToken) {
     // 从全局变量中获取token
     const { token } = app.globalData;
-    header.Authorization = `Bearer ${token}`;
+    console.log('token', token);
+    header.token = token;
   }
   return new Promise((resolve, reject) => {
     wx.request({

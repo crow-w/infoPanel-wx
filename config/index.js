@@ -3,7 +3,7 @@ export const config = {
   useMock: true,
 };
 
-export const BASEURL = 'http://localhost:3000/v1';
+export const BASEURL = 'http://localhost:8888/api/app';
 
 export const cdnBase = 'https://we-retail-static-1300977798.cos.ap-guangzhou.myqcloud.com/retail-mp';
 
